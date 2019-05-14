@@ -10,9 +10,4 @@ public interface DeveloperDao {
 	
 	public void addDeveloper(Developer dev);
 	
-/*	public Developer find(Long devID);
-	
-	public List<Developer> findByName(String firstname, String lastname);
-*/
-	
 }

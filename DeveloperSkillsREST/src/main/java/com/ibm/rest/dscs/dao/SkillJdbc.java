@@ -50,19 +50,7 @@ public class SkillJdbc implements SkillDao {
 			
 			return connection;
 		}
-		
-	  /*  private String createSearchValue(String string) {
-			
-			String value;
-			
-			if (StringUtils.isBlank(string)) {
-				value = "%";
-			} else {
-				value = string;
-			}
-			
-			return value;
-		}*/
+
 		
 		@Override
 		public List<Skill> findAll() {
@@ -104,64 +92,5 @@ public class SkillJdbc implements SkillDao {
 				
 			}
 		}
-
-		
-/*
-		@Override
-		public Skill find(Long skillID) {
-			Skill skill = null;
-
-			if (skillID != null) { 
-				String sql = "SELECT SKILL_ID, SKILL FROM SKILLS where SKILL_ID = ?";
-				
-				try (Connection con = getConnection();
-				     PreparedStatement ps = con.prepareStatement(sql))
-	               {
-					
-	                ps.setInt(1, skillID.intValue());
-					ResultSet rs = ps.executeQuery();
-
-					if (rs.next()) {
-						skill = new Skill(Long.valueOf(rs.getInt("skillID")), 
-								          rs.getString("skill"));
-					}
-
-				} catch (SQLException e) {
-					e.printStackTrace();
-					throw new RuntimeException(e);
-				}
-			}
-
-			return skill;
-		}
-
-		@Override
-		public List<Skill> findByName(String skill) {
-			List<Skill> skills = new ArrayList<>();
-
-			String sql = "SELECT SKILL_ID, SKILL FROM SKILLS WHERE SKILL LIKE ?";
-
-			try(Connection con = getConnection();
-				PreparedStatement ps = con.prepareStatement(sql))
-			   {
-
-				ps.setString(1, createSearchValue(skill));
-				
-				ResultSet rs = ps.executeQuery();
-
-				while (rs.next()) {
-					Skill skillss = new Skill(Long.valueOf(rs.getInt("skillID")), 
-							                             rs.getString("skill"));
-					                                      skills.add(skillss);
-				}
-
-			} catch (SQLException e) {
-				e.printStackTrace();
-				throw new RuntimeException(e);
-			}
-
-			return skills;
-		}		
-		*/
 
 }

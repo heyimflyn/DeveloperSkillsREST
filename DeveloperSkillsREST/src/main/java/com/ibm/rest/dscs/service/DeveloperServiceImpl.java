@@ -27,16 +27,6 @@ public class DeveloperServiceImpl implements DeveloperService {
 	public void addDeveloper(Developer dev) {
         devdao.addDeveloper(dev);
 	}
-
-/*	@Override
-	public Developer find(Long devID) {
-	 return devdao.find(devID);
-	}
-
-	@Override
-	public List<Developer> findByName(String firstname, String lastname) {
-		return devdao.findByName(firstname, lastname);
-	}
-*/
+	
 }
 

@@ -25,15 +25,5 @@ public class SkillServiceImpl implements SkillService{
 	public void addSkill(Skill skill) {
 			skilldao.addSkill(skill);
 	}
-	/*
-	@Override
-	public Skill find(long skillID) {
-		return skilldao.find(skillID);
-	}
-
-	@Override
-	public List<Skill> findByName(String skill) {
-		return skilldao.findByName(skill);
-	}
-*/
+	
 }

@@ -46,12 +46,13 @@ public class SkillAssessmentJdbc implements SkillAssessmentDao{
 		  {
 			
 			while (rs.next()) {
-				String SkillName = rs.getString("SkillName");
-				int DEV_ID = rs.getInt("DEV_ID");
+			//	String SkillName = rs.getString("SkillName");
 				int MonthsExp= rs.getInt("MonthsExp");
 				int SkillLevel = rs.getInt("SkillLevel");
-				SkillAssessment skillAssessment = new SkillAssessment(SkillName, MonthsExp,
-					SkillLevel,DEV_ID);
+				int DEV_ID = rs.getInt("DEV_ID");
+				int SKILL_ID = rs.getInt("SKILL_ID");
+				SkillAssessment skillAssessment = new SkillAssessment(/*SkillName, */MonthsExp,
+					SkillLevel,DEV_ID, SKILL_ID);
 				skillAssess.add(skillAssessment);
 			}
 
@@ -64,15 +65,16 @@ public class SkillAssessmentJdbc implements SkillAssessmentDao{
 	@Override
 	public void addSkillAssessment(SkillAssessment addSA) {
 		
-	String sql = "INSERT INTO SKILLASSESSMENT (SkillName, MonthsExp, SkillLevel, DEV_ID) values (?,?,?,?)";
+	String sql = "INSERT INTO SKILLASSESSMENT (MonthsExp, SkillLevel, DEV_ID, SKILL_ID) values (?,?,?,?)";
 	
 		try(Connection con = JDBC.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql)) 
 		   { 
-			ps.setString(1, addSA.getSkillName());
-			ps.setInt(2, addSA.getMonthsExp());
-			ps.setInt(3, addSA.getSkillLevel());
-			ps.setInt(4, addSA.getDEV_ID());
+		//	ps.setString(1, addSA.getSkillName());
+			ps.setInt(1, addSA.getMonthsExp());
+			ps.setInt(2, addSA.getSkillLevel());
+			ps.setInt(3, addSA.getDEV_ID());
+			ps.setInt(4, addSA.getSKILL_ID());
 			ps.executeUpdate();
 			
 		}catch (SQLException e) {
@@ -85,14 +87,15 @@ public class SkillAssessmentJdbc implements SkillAssessmentDao{
 	@Override
 	public void updateSkillAssessment(SkillAssessment upSA) {
 		
-		String sql = "UPDATE SKILLASSESSMENT SET SkillName = ?, MonthsExp = ?, SkillLevel = ? WHERE  DEV_ID = ?";
+		String sql = "UPDATE SKILLASSESSMENT SET MonthsExp = ?, SkillLevel = ?, SKILL_ID = ? WHERE DEV_ID = ?";
 		
 		try(Connection con = JDBC.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql))
 		   { 
-			ps.setString(1, upSA.getSkillName()); 
-			ps.setInt(2, upSA.getMonthsExp());
-			ps.setInt(3, upSA.getSkillLevel());
+		//	ps.setString(1, upSA.getSkillName()); 
+			ps.setInt(1, upSA.getMonthsExp());
+			ps.setInt(2, upSA.getSkillLevel());
+			ps.setInt(3,  upSA.getSKILL_ID());
 			ps.setInt(4, upSA.getDEV_ID());
 			ps.executeUpdate();
 			

@@ -8,10 +8,4 @@ public interface SkillDao {
 	public List<Skill> findAll();
 	
 	public void addSkill(Skill SkillName);
-	
-	/*
-	public Skill find(int SKILL_ID);
-	
-	public List<Skill> findByName(String SkillName);
-	*/
 }

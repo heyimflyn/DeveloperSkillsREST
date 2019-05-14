@@ -116,9 +116,9 @@ public class Controller {
 		try {
 			SkillAssessmentService SAservice = new SkillAssessmentServiceImpl();
 			SAservice.addSkillAssessment(addSA);
-			String result = "Skill Assessment saved!" + "\nSkill Name: " 
-			    + addSA.getSkillName() + "\nMonths Experience: "
-				+ addSA.getMonthsExp() + "\nSkill Level: "
+			String result = "Skill Assessment saved!" + "\nMonths Experience: "
+				+ addSA.getMonthsExp() + "\nSkill ID: "
+				+ addSA.getSKILL_ID() +  "\nSKill Level: "
 			    + addSA.getSkillLevel() + "\nDeveloper ID: " 
 				+ addSA.getDEV_ID();
 			return Response.status(201).entity(result).build();
@@ -136,9 +136,9 @@ public class Controller {
 		try {
 			SkillAssessmentService SAservice = new SkillAssessmentServiceImpl();
 			SAservice.updateSkillAssessment(upSA);
-			String result = "Skill Assessment updated!" + "\nSkill Name:" 
-			    + upSA.getSkillName() + "\nMonths Experience: "
-				+ upSA.getMonthsExp() + "\nSkill Level: " 
+			String result = "Skill Assessment updated!" + "\nMonths Experience: "
+				+ upSA.getMonthsExp() + "\nSkill ID: "
+				+ upSA.getSKILL_ID() + "\nSkill Level: " 
 			    + upSA.getSkillLevel() + "\nDeveloper ID: " 
 				+ upSA.getDEV_ID();
 			return Response.status(200).entity(result).build();

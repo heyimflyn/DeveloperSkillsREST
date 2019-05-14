@@ -10,9 +10,4 @@ public interface SkillService {
 	
 	public void addSkill(Skill SkillName);
 	
-	/*
-	public Skill find(int SKILL_ID);
-	
-	public List<Skill> findByName(String SkillName);
-	*/
 }
