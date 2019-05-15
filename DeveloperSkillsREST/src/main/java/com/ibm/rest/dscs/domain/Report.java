@@ -31,9 +31,15 @@ public class Report {
 	}
 	
 	public String toString() {
-		return "SKILL ID: " + SKILL_ID + " Skill Name: " + SkillName + " Trained: " + Trained + " Novice: " + Novice
-				+ " Proficient: " + Proficient + " Advanced: " + Advanced + " Expert " + Expert 
-				+ " ThoughtLeader: " + ThoughtLeader + " Total: " + Total;
+		return "Skill ID: " + SKILL_ID 
+				+ " Skill Name: " + SkillName 
+				+ " Trained: " + Trained 
+				+ " Novice: " + Novice
+				+ " Proficient: " + Proficient 
+				+ " Advanced: " + Advanced 
+				+ " Expert " + Expert 
+				+ " ThoughtLeader: " + ThoughtLeader
+				+ " Total: " + Total;
 	}
 	
 	//GETTERS & SETTERS

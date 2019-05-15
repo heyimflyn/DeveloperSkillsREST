@@ -51,7 +51,7 @@ public class SkillJdbc implements SkillDao {
 			return connection;
 		}
 
-		
+//-----------------FIND SKILLS----------------------------------		
 		@Override
 		public List<Skill> findAll() {
 			List<Skill> skills = new ArrayList<Skill>();
@@ -75,6 +75,7 @@ public class SkillJdbc implements SkillDao {
 			return skills;
 		}
 		
+//-----------------ADD SKILLS----------------------------------			
 		@Override
 		public void addSkill(Skill addskill) { 
 			

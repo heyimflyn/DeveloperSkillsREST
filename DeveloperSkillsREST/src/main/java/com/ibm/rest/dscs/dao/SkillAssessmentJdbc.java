@@ -34,6 +34,7 @@ public class SkillAssessmentJdbc implements SkillAssessmentDao{
 		JDBC = new DatabaseConnection();
 	}
     
+//-----------------FIND SKILL ASSESSMENT----------------------------------		
 	@Override
 	public List<SkillAssessment> findAll() {
 		List<SkillAssessment> skillAssess = new ArrayList<SkillAssessment>();
@@ -46,13 +47,13 @@ public class SkillAssessmentJdbc implements SkillAssessmentDao{
 		  {
 			
 			while (rs.next()) {
-			//	String SkillName = rs.getString("SkillName");
 				int MonthsExp= rs.getInt("MonthsExp");
 				int SkillLevel = rs.getInt("SkillLevel");
 				int DEV_ID = rs.getInt("DEV_ID");
 				int SKILL_ID = rs.getInt("SKILL_ID");
-				SkillAssessment skillAssessment = new SkillAssessment(/*SkillName, */MonthsExp,
-					SkillLevel,DEV_ID, SKILL_ID);
+				int AssessmentID = rs.getInt("AssessmentID");
+				SkillAssessment skillAssessment = new SkillAssessment(MonthsExp,
+					SkillLevel,DEV_ID, SKILL_ID, AssessmentID);
 				skillAssess.add(skillAssessment);
 			}
 
@@ -62,6 +63,7 @@ public class SkillAssessmentJdbc implements SkillAssessmentDao{
 		return skillAssess;
 	}
 
+//-----------------ADD SKILL ASSESSMENT----------------------------------	
 	@Override
 	public void addSkillAssessment(SkillAssessment addSA) {
 		
@@ -70,7 +72,6 @@ public class SkillAssessmentJdbc implements SkillAssessmentDao{
 		try(Connection con = JDBC.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql)) 
 		   { 
-		//	ps.setString(1, addSA.getSkillName());
 			ps.setInt(1, addSA.getMonthsExp());
 			ps.setInt(2, addSA.getSkillLevel());
 			ps.setInt(3, addSA.getDEV_ID());
@@ -83,20 +84,43 @@ public class SkillAssessmentJdbc implements SkillAssessmentDao{
 			
 		}
 	}
+	
+	public void SkillAlreadyExist(int DEV_ID, int SKILL_ID) {
+		
+		String sql = "SELECT * FROM skillassessments WHERE DEV_ID = ? AND SKILL_ID = ?";
 
+		try (Connection conn = JDBC.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+			ps.setInt(1, DEV_ID);
+			ps.setInt(2, SKILL_ID);
+			
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				break;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
+
+//-----------------UPDATE SKILL ASSESSMENT----------------------------------		
 	@Override
 	public void updateSkillAssessment(SkillAssessment upSA) {
 		
-		String sql = "UPDATE SKILLASSESSMENT SET MonthsExp = ?, SkillLevel = ?, SKILL_ID = ? WHERE DEV_ID = ?";
+		String sql = "UPDATE SKILLASSESSMENT SET MonthsExp = ?, SkillLevel = ? "
+				+ "WHERE SKILL_ID = ? AND DEV_ID = ? AND AssessmentID = ?";
 		
 		try(Connection con = JDBC.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql))
 		   { 
-		//	ps.setString(1, upSA.getSkillName()); 
 			ps.setInt(1, upSA.getMonthsExp());
 			ps.setInt(2, upSA.getSkillLevel());
 			ps.setInt(3,  upSA.getSKILL_ID());
 			ps.setInt(4, upSA.getDEV_ID());
+			ps.setInt(5, upSA.getAssessmentID());
 			ps.executeUpdate();
 			
 		}catch (SQLException e) {

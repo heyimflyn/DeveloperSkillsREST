@@ -14,26 +14,49 @@ public class ReportJdbc implements ReportDao{
 	
 	DatabaseConnection JDBC;
 	
+	private static ReportJdbc INSTANCE;
+
+	static public ReportJdbc getInstance() {
+
+		ReportJdbc instance;
+		if (INSTANCE != null) {
+			instance = INSTANCE;
+		} else {
+			instance = new ReportJdbc();
+			INSTANCE = instance;
+		}
+
+		return instance;
+	}
+	
+	public ReportJdbc() {
+		JDBC = new DatabaseConnection();
+	}
+	
+	
 	@Override
 	public List<Report> getReport() {
 		List<Report> reports = new ArrayList<Report>();
-		try {
-			Connection con = JDBC.getConnection(); 
-			String query = "SELECT skill.SKILL_ID AS SKILL_ID, "
-					+ "skill.SkillName AS SkillName,"
-					+ "COUNT(skillassessment.AssessmentId) AS total,"
-					+ "COUNT(CASE WHEN skillassessment.SkillLevel = 0 THEN 1 END) AS Trained,"
-					+ "COUNT(CASE WHEN skillassessment.SkillLevel = 1 THEN 1 END) AS Novice,"
-					+ "COUNT(CASE WHEN skillassessment.SkillLevel = 2 THEN 1 END) AS Proficient,"
-					+ "COUNT(CASE WHEN skillassessment.SkillLevel = 3 THEN 1 END) AS Advanced,"
-					+ "COUNT(CASE WHEN skillassessment.SkillLevel = 4 THEN 1 END) AS Expert,"
-					+ "COUNT(CASE WHEN skillassessment.SkillLevel = 5 THEN 1 END) AS ThoughtLeader "
-					+ "FROM skillassessment "
-					+ "INNER JOIN skill "
-					+ "ON skillassessment.SKILL_ID = skill.SKILL_ID "
-					+ "GROUP BY skillassessment.SKILL_ID";
-			PreparedStatement ps = con.prepareStatement(query);
-			ResultSet rs = ps.executeQuery();
+		
+		String sql = "SELECT skills.SKILL_ID AS SKILL_ID, "
+				+ "skills.SkillName AS SkillName,"
+				+ "COUNT(skillassessment.AssessmentID) AS total,"
+				+ "COUNT(CASE WHEN skillassessment.SkillLevel = 0 THEN 1 END) AS Trained,"
+				+ "COUNT(CASE WHEN skillassessment.SkillLevel = 1 THEN 1 END) AS Novice,"
+				+ "COUNT(CASE WHEN skillassessment.SkillLevel = 2 THEN 1 END) AS Proficient,"
+				+ "COUNT(CASE WHEN skillassessment.SkillLevel = 3 THEN 1 END) AS Advanced,"
+				+ "COUNT(CASE WHEN skillassessment.SkillLevel = 4 THEN 1 END) AS Expert,"
+				+ "COUNT(CASE WHEN skillassessment.SkillLevel = 5 THEN 1 END) AS ThoughtLeader "
+				+ "FROM skillassessment "
+				+ "INNER JOIN skills "
+				+ "ON skillassessment.SKILL_ID = skills.SKILL_ID "
+				+ "GROUP BY skillassessment.SKILL_ID";
+		
+		try (Connection con = JDBC.getConnection(); 
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery()) 
+		{
+
 			while (rs.next()) {
 				int SKILL_ID = rs.getInt("SKILL_ID");
 				String SkillName = rs.getString("SkillName");

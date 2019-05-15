@@ -33,7 +33,8 @@ public class DeveloperJdbc implements DeveloperDao{
 	public DeveloperJdbc() {
 		JDBC = new DatabaseConnection();
 	}
-	
+
+//-----------------FIND DEVELOPERS----------------------------------	
 	@Override
 	public List<Developer> findAll() {
 		List<Developer> devs = new ArrayList<Developer>();
@@ -62,7 +63,8 @@ public class DeveloperJdbc implements DeveloperDao{
 
 		return devs;
 	}
-	
+
+//-----------------ADD DEVELOPER----------------------------------	
 	@Override
 	public void addDeveloper(Developer adddev) {
 		
