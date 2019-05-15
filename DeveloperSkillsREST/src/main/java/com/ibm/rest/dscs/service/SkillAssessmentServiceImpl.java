@@ -25,10 +25,5 @@ public class SkillAssessmentServiceImpl implements SkillAssessmentService {
 		
 	}
 
-	@Override
-	public void updateSkillAssessment(SkillAssessment upSA) {
-		skillAssessdao.updateSkillAssessment(upSA);
-		
-	}
 
 }

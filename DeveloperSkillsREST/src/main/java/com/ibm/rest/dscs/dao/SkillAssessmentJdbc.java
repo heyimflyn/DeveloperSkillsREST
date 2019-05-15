@@ -89,7 +89,8 @@ public class SkillAssessmentJdbc implements SkillAssessmentDao{
 		
 		String sql = "SELECT * FROM skillassessments WHERE DEV_ID = ? AND SKILL_ID = ?";
 
-		try (Connection conn = JDBC.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+		try (Connection con = JDBC.getConnection(); 
+			PreparedStatement ps = con.prepareStatement(sql)) {
 
 			ps.setInt(1, DEV_ID);
 			ps.setInt(2, SKILL_ID);
@@ -97,6 +98,27 @@ public class SkillAssessmentJdbc implements SkillAssessmentDao{
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
+				break;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public void DevIDAlreadyExist(int DEV_ID) {
+		
+		String sql = "SELECT * FROM developers WHERE DEV_ID = ?";
+
+		try (Connection con = JDBC.getConnection(); 
+			PreparedStatement ps = con.prepareStatement(sql)) {
+
+			ps.setInt(1, DEV_ID);
+			
+			ResultSet results = ps.executeQuery();
+
+			while (results.next()) {
 				break;
 			}
 

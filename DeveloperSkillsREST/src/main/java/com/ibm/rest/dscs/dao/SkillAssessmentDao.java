@@ -11,7 +11,5 @@ public interface SkillAssessmentDao {
 	public void addSkillAssessment(SkillAssessment addSA);
 		
 	public void updateSkillAssessment(SkillAssessment upSA);
-	
-	public void SkillAlreadyExist(int DEV_ID, int SKILL_ID);
 		
 }
