@@ -85,7 +85,7 @@ public class SkillAssessmentJdbc implements SkillAssessmentDao{
 		}
 	}
 	
-	public void SkillAlreadyExist(int DEV_ID, int SKILL_ID) {
+/*	public void SkillAlreadyExist(int DEV_ID, int SKILL_ID) {
 		
 		String sql = "SELECT * FROM skillassessments WHERE DEV_ID = ? AND SKILL_ID = ?";
 
@@ -126,7 +126,7 @@ public class SkillAssessmentJdbc implements SkillAssessmentDao{
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
-	}
+	} */
 
 //-----------------UPDATE SKILL ASSESSMENT----------------------------------		
 	@Override
