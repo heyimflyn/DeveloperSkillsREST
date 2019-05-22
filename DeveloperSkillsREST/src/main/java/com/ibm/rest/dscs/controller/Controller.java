@@ -4,10 +4,12 @@ import java.sql.Date;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
@@ -101,6 +103,22 @@ public class Controller {
 					+ dev.getBirthdate() + "\nPosition: "
 					+ dev.getPosition();
 			return Response.status(201).entity(result).build();
+		} catch (Exception e) {
+			throw new WebApplicationException(e);
+		}
+	}
+	
+	//DELETE DEVELOPER
+	@DELETE
+	@Path("{DEV_ID}")
+	public Response delDeveloper(@PathParam("DEV_ID") String DEV_ID) {
+
+		try {
+			DeveloperService devservice = new DeveloperServiceImpl();
+			int DEV_ID1 = Integer.parseInt(DEV_ID);
+			devservice.delDeveloper(DEV_ID1);
+			String result = "Developer Removed";
+			return Response.status(200).entity(result).build();
 		} catch (Exception e) {
 			throw new WebApplicationException(e);
 		}

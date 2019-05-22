@@ -9,4 +9,6 @@ public interface DeveloperService {
     public List<Developer> findAll();
 	
     public void addDeveloper(Developer dev);
+    
+    public void delDeveloper(int DEV_ID);
 }

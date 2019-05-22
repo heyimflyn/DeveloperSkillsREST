@@ -86,5 +86,22 @@ public class DeveloperJdbc implements DeveloperDao{
 			
 		}
 	}
+//-----------------DELETE DEVELOPER----------------------------------	
+	@Override
+	public void delDeveloper(int DEV_ID) {
+		String sql = "DELETE FROM DEVELOPERS WHERE DEV_ID = ?";
+
+		try (Connection con = JDBC.getConnection();
+		     PreparedStatement ps = con.prepareStatement(sql))
+			{ 
+			ps.setInt(1, DEV_ID);
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+			
+		}
+	}
 }
 

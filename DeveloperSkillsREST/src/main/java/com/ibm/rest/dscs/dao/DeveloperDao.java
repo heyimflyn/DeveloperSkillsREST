@@ -10,4 +10,7 @@ public interface DeveloperDao {
 	
 	public void addDeveloper(Developer dev);
 	
+	public void delDeveloper(int DEV_ID);
+
+	
 }

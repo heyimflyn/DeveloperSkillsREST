@@ -28,5 +28,10 @@ public class DeveloperServiceImpl implements DeveloperService {
         devdao.addDeveloper(dev);
 	}
 	
+	@Override
+	public void delDeveloper(int DEV_ID) {
+		devdao.delDeveloper(DEV_ID);
+	}
+	
 }
 
